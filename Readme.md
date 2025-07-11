@@ -22,6 +22,15 @@ Run it on each machine and start moving your stuff.
 | macOS | [FileDrop-mac.zip](https://github.com/salireza111/FileDrop/releases/download/V1.0.0/FileDrop-mac.zip) |
 | Windows | [FileDrop-windows.7z](https://github.com/salireza111/FileDrop/releases/download/V1.0.0/FileDrop-windows.7z) |
 
+## 📦 Install on macOS (Homebrew)
+
+```bash
+# Add the tap once
+brew tap salireza111/filedrop
+
+# Then install or upgrade any time
+brew install --cask filedrop
+
 ### Roadmap
 
 - [ ] Upload files to servers via SCP  
