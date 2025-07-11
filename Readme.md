@@ -30,6 +30,7 @@ brew tap salireza111/filedrop
 
 # Then install or upgrade any time
 brew install --cask filedrop
+```
 
 ### Roadmap
 
