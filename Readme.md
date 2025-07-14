@@ -31,6 +31,8 @@ brew tap salireza111/filedrop
 # Then install or upgrade any time
 brew install --cask filedrop
 ```
+## 📦 Snap
+[![Get it from the Snap Store](https://snapcraft.io/en/dark/install.svg)](https://snapcraft.io/filedrop)
 
 ### Roadmap
 
