@@ -11,7 +11,7 @@
 
 Name "${PRODUCT_NAME}"
 OutFile "${PROJECT_ROOT}\\FileDrop-${RELEASE_TAG}-windows.exe"
-InstallDir "$PROGRAMFILES\\FileDrop"
+InstallDir "$LOCALAPPDATA\\FileDrop"
 RequestExecutionLevel user
 
 Page directory
