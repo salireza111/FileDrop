@@ -19,7 +19,7 @@ Page instfiles
 
 Section "Install"
   SetOutPath "$INSTDIR"
-  !ifexist "${PROJECT_ROOT}\\dist\\FileDrop\\*"
+  !ifexist "${PROJECT_ROOT}\\dist\\FileDrop\\FileDrop.exe"
     File /r "${PROJECT_ROOT}\\dist\\FileDrop\\*"
   !else
     !ifexist "${PROJECT_ROOT}\\dist\\FileDrop.exe"
