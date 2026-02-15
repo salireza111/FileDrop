@@ -15,6 +15,6 @@ Page instfiles
 
 Section "Install"
   SetOutPath "$INSTDIR"
-  File /r "dist\\FileDrop\\*"
+  File /r "packaging\\windows\\stage\\*"
   CreateShortCut "$DESKTOP\\FileDrop.lnk" "$INSTDIR\\FileDrop.exe"
 SectionEnd

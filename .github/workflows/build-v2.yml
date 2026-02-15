@@ -63,6 +63,15 @@ jobs:
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
+          Remove-Item -Recurse -Force packaging\\windows\\stage -ErrorAction SilentlyContinue
+          New-Item -ItemType Directory -Path packaging\\windows\\stage | Out-Null
+          if (Test-Path dist\\FileDrop) {
+            Copy-Item -Recurse -Force dist\\FileDrop\\* packaging\\windows\\stage\\
+          } elseif (Test-Path dist\\FileDrop.exe) {
+            Copy-Item -Force dist\\FileDrop.exe packaging\\windows\\stage\\FileDrop.exe
+          } else {
+            throw "Build output not found in dist/"
+          }
           $makensis = (Get-Command makensis.exe -ErrorAction SilentlyContinue).Source
           if (-not $makensis) {
             $makensis = Join-Path ${env:ProgramFiles(x86)} "NSIS\\makensis.exe"
@@ -85,6 +94,7 @@ jobs:
           chmod +x "$APPDIR/AppRun"
           cp packaging/linux/FileDrop.desktop "$APPDIR/FileDrop.desktop"
           cp assets/icon.png "$APPDIR/usr/share/icons/hicolor/256x256/apps/FileDrop.png"
+          cp assets/icon.png "$APPDIR/FileDrop.png"
           curl -L -o appimagetool https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
           chmod +x appimagetool
           ARCH=x86_64 ./appimagetool "$APPDIR" "FileDrop-${{ env.RELEASE_TAG }}-linux.AppImage"

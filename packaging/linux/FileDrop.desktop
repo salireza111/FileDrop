@@ -3,4 +3,4 @@ Name=FileDrop
 Exec=FileDrop
 Icon=FileDrop
 Type=Application
-Categories=Utility;Network;
+Categories=Utility;
