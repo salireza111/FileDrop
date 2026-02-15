@@ -2,6 +2,7 @@ import argparse
 import colorsys  # PyInstaller packaging guard
 import http.cookies  # PyInstaller packaging guard
 import zoneinfo  # PyInstaller packaging guard
+import html  # PyInstaller packaging guard
 import json
 import os
 import socket
