@@ -8,6 +8,7 @@ import email.message  # noqa: F401
 import email.parser  # noqa: F401
 import email.policy  # noqa: F401
 import email.utils  # noqa: F401
+import fractions  # noqa: F401
 import hashlib  # noqa: F401
 import hmac  # noqa: F401
 import html  # noqa: F401

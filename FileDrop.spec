@@ -30,7 +30,7 @@ if os.path.isdir(vendor_dir):
     datas.append((vendor_dir, 'FileDrop_Web/vendor'))
 
 binaries = []
-hiddenimports = ['appdirs', 'zoneinfo', 'backports.zoneinfo', 'http.cookies', 'colorsys', 'html']
+hiddenimports = ['appdirs', 'zoneinfo', 'backports.zoneinfo', 'http.cookies', 'colorsys', 'html', 'fractions']
 if not is_darwin:
     qt_datas, qt_binaries, qt_hidden = collect_all('PyQt5')
     datas += qt_datas
