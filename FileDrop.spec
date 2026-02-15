@@ -10,6 +10,13 @@ CONF['cachedir'] = os.path.join(os.path.abspath('.'), 'build_cache')
 root_dir = os.path.abspath('.')
 onefile = os.environ.get('FILEDROP_ONEFILE') == '1'
 is_darwin = sys.platform == 'darwin'
+is_win = sys.platform.startswith('win')
+if is_darwin:
+    exe_icon = 'assets/icon.icns'
+elif is_win:
+    exe_icon = 'assets/icon.ico'
+else:
+    exe_icon = None
 extra_pathex = []
 datas = [
     ('FileDrop_Web/server.py', 'FileDrop_Web'),
@@ -36,28 +43,49 @@ hiddenimports=['appdirs', 'zoneinfo', 'http.cookies', 'colorsys', 'html'],
 )
 pyz = PYZ(a.pure)
 
-exe = EXE(
-    pyz,
-    a.scripts,
-    [],
-    exclude_binaries=not onefile,
-    name='FileDrop',
-    debug=False,
-    bootloader_ignore_signals=False,
-    strip=False,
-    upx=True,
-    console=False,
-    disable_windowed_traceback=False,
-    argv_emulation=False,
-    target_arch=None,
-    codesign_identity=None,
-    entitlements_file=None,
-    icon=['assets/icon.icns'],
-)
-if not onefile:
+if onefile:
+    exe = EXE(
+        pyz,
+        a.scripts,
+        a.binaries,
+        a.zipfiles,
+        a.datas,
+        name='FileDrop',
+        debug=False,
+        bootloader_ignore_signals=False,
+        strip=False,
+        upx=True,
+        console=False,
+        disable_windowed_traceback=False,
+        argv_emulation=False,
+        target_arch=None,
+        codesign_identity=None,
+        entitlements_file=None,
+        icon=[exe_icon] if exe_icon else None,
+    )
+else:
+    exe = EXE(
+        pyz,
+        a.scripts,
+        [],
+        exclude_binaries=True,
+        name='FileDrop',
+        debug=False,
+        bootloader_ignore_signals=False,
+        strip=False,
+        upx=True,
+        console=False,
+        disable_windowed_traceback=False,
+        argv_emulation=False,
+        target_arch=None,
+        codesign_identity=None,
+        entitlements_file=None,
+        icon=[exe_icon] if exe_icon else None,
+    )
     coll = COLLECT(
         exe,
         a.binaries,
+        a.zipfiles,
         a.datas,
         strip=False,
         upx=True,
