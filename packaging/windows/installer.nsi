@@ -1,12 +1,16 @@
 !include "MUI2.nsh"
 
+!ifndef PROJECT_ROOT
+  !define PROJECT_ROOT "."
+!endif
+
 !define PRODUCT_NAME "FileDrop"
 !ifndef RELEASE_TAG
   !define RELEASE_TAG "dev"
 !endif
 
 Name "${PRODUCT_NAME}"
-OutFile "FileDrop-${RELEASE_TAG}-windows.exe"
+OutFile "${PROJECT_ROOT}\\FileDrop-${RELEASE_TAG}-windows.exe"
 InstallDir "$PROGRAMFILES\\FileDrop"
 RequestExecutionLevel user
 
@@ -15,11 +19,11 @@ Page instfiles
 
 Section "Install"
   SetOutPath "$INSTDIR"
-  !ifexist "dist\\FileDrop\\*"
-    File /r "dist\\FileDrop\\*"
+  !ifexist "${PROJECT_ROOT}\\dist\\FileDrop\\*"
+    File /r "${PROJECT_ROOT}\\dist\\FileDrop\\*"
   !else
-    !ifexist "dist\\FileDrop.exe"
-      File "dist\\FileDrop.exe"
+    !ifexist "${PROJECT_ROOT}\\dist\\FileDrop.exe"
+      File "${PROJECT_ROOT}\\dist\\FileDrop.exe"
     !else
       !error "Build output not found in dist/"
     !endif

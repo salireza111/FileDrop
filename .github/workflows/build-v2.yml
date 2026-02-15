@@ -74,7 +74,7 @@ jobs:
           if (-not (Test-Path $makensis)) {
             throw "makensis.exe not found"
           }
-          & $makensis /DRELEASE_TAG=${{ env.RELEASE_TAG }} packaging\\windows\\installer.nsi
+          & $makensis /DRELEASE_TAG=${{ env.RELEASE_TAG }} /DPROJECT_ROOT="$env:GITHUB_WORKSPACE" packaging\\windows\\installer.nsi
 
       - name: Package Linux
         if: runner.os == 'Linux'
