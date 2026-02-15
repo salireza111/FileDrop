@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04, windows-latest, macos-latest]
+        os: [ubuntu-22.04, windows-latest, macos-latest]
 
     steps:
       - uses: actions/checkout@v4
@@ -47,10 +47,26 @@ jobs:
         run: |
           python -c "import shutil; [shutil.rmtree(d, ignore_errors=True) for d in ('build','build_cache','dist')]"
 
+      - name: Build (Linux in ubuntu:20.04 container)
+        if: runner.os == 'Linux'
+        run: |
+          docker run --rm -v "$GITHUB_WORKSPACE:/work" -w /work ubuntu:20.04 bash -lc "
+            apt-get update &&
+            apt-get install -y python3 python3-pip python3-venv build-essential patchelf curl &&
+            python3 -m pip install --upgrade pip &&
+            pip3 install -r requirements.txt &&
+            pip3 install -r FileDrop_Web/requirements.txt &&
+            pip3 install pyinstaller &&
+            python3 FileDrop_Web/build_vendor.py &&
+            pyinstaller -y --clean FileDrop.spec
+          "
+
       - name: Build web vendor
+        if: runner.os != 'Linux'
         run: python FileDrop_Web/build_vendor.py
 
       - name: Build app
+        if: runner.os != 'Linux'
         run: pyinstaller -y --clean FileDrop.spec
 
       - name: Ensure PyQt5 in dist (Windows)
