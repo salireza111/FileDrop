@@ -157,3 +157,35 @@ jobs:
             release-artifacts/**/FileDrop-${{ env.RELEASE_TAG }}-mac.dmg
             release-artifacts/**/FileDrop-${{ env.RELEASE_TAG }}-windows.exe
             release-artifacts/**/FileDrop-${{ env.RELEASE_TAG }}-linux.AppImage
+
+  snap:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build (Linux in ubuntu:20.04 container)
+        run: |
+          docker run --rm -v "$GITHUB_WORKSPACE:/work" -w /work python:3.11-bullseye bash -lc "
+            apt-get update &&
+            apt-get install -y build-essential patchelf curl &&
+            python -m pip install --upgrade pip &&
+            pip install -r requirements.txt &&
+            pip install -r FileDrop_Web/requirements.txt &&
+            pip install pyinstaller &&
+            python FileDrop_Web/build_vendor.py &&
+            pyinstaller -y --clean FileDrop.spec
+          "
+
+      - name: Install snapcraft
+        run: |
+          sudo snap install snapcraft --classic
+
+      - name: Build snap
+        run: |
+          sudo snapcraft --destructive-mode
+
+      - name: Upload snap artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: FileDrop-snap
+          path: "*.snap"

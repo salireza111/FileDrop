@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=FileDrop
+Comment=Drag-and-drop LAN file transfer
+Exec=filedrop             
+Icon=filedrop             
+Terminal=false
+Type=Application
+Categories=Utility;Network;

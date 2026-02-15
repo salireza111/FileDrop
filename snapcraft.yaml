@@ -1,0 +1,34 @@
+name: filedrop
+base: core22
+version: "1.0.0"
+summary: Simple drag-and-drop LAN file transfer
+description: |
+  …
+
+grade: stable
+confinement: strict
+architectures: [amd64]
+
+apps:
+  filedrop:
+    command: bin/filedrop
+    environment:
+      HOME: $SNAP_REAL_HOME
+    plugs:                       
+      - network
+      - network-bind
+      - home               
+      - desktop            
+      - desktop-legacy     
+      - x11                
+      - wayland            
+      - opengl             
+
+parts:
+  filedrop:
+    plugin: dump
+    source: dist/
+    stage-packages:
+      - libgl1                   
+    organize:
+      FileDrop: bin/filedrop      
