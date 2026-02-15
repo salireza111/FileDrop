@@ -12,6 +12,7 @@ architectures: [amd64]
 apps:
   filedrop:
     command: bin/FileDrop
+    desktop: snap/gui/filedrop.desktop
     environment:
       HOME: $SNAP_REAL_HOME
     plugs:
