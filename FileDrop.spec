@@ -3,7 +3,7 @@
 import os
 import sys
 from PyInstaller.config import CONF
-from PyInstaller.utils.hooks import collect_all
+from PyInstaller.utils.hooks import collect_all, collect_submodules
 
 # Ensure PyInstaller cache stays within the workspace (avoids permission errors).
 CONF['cachedir'] = os.path.join(os.path.abspath('.'), 'build_cache')
@@ -35,6 +35,7 @@ if not is_darwin:
     datas += qt_datas
     binaries += qt_binaries
     hiddenimports += qt_hidden
+    hiddenimports += collect_submodules('PyQt5')
 
 a = Analysis(
     ['FileDrop.py'],

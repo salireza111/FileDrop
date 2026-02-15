@@ -34,6 +34,7 @@ jobs:
           pip install -r requirements.txt
           pip install -r FileDrop_Web/requirements.txt
           pip install pyinstaller
+          pip show PyQt5 || true
 
       - name: Build web vendor
         run: python FileDrop_Web/build_vendor.py
