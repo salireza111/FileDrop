@@ -20,13 +20,13 @@ Lightweight web-based companion for LAN sharing. Start a local server, share a l
 
 ![DropFile](./V2.png)
 
-### Downloads (V1)
+### Downloads (V2)
 
 | Platform | File |
 |----------|------|
-| Linux | [FileDrop-linux.tar.gz](https://github.com/salireza111/FileDrop/releases/download/V1.0.0/FileDrop-linux.tar.gz) |
-| macOS | [FileDrop-mac.zip](https://github.com/salireza111/FileDrop/releases/download/V1.0.0/FileDrop-mac.zip) |
-| Windows | [FileDrop-windows.7z](https://github.com/salireza111/FileDrop/releases/download/V1.0.0/FileDrop-windows.7z) |
+| Linux | [FileDrop-linux.tar.gz](https://github.com/salireza111/FileDrop/releases/download/v2.0.9.2/FileDrop-v2.0.9.2-linux.AppImage) |
+| macOS | [FileDrop-mac.zip](https://github.com/salireza111/FileDrop/releases/download/v2.0.9.2/FileDrop-v2.0.9.2-mac.dmg) |
+| Windows | [FileDrop-windows.7z](https://github.com/salireza111/FileDrop/releases/download/v2.0.9.2/FileDrop-v2.0.9.2-windows.exe) |
 
 ## 📦 Install on macOS (Homebrew)
 
@@ -37,7 +37,7 @@ brew tap salireza111/filedrop
 # Then install or upgrade any time
 brew install --cask filedrop
 ```
-## 📦 Snap
+## 📦 Snap (V1)
 [![Get it from the Snap Store](https://snapcraft.io/en/dark/install.svg)](https://snapcraft.io/filedrop)
 
 ### Roadmap
@@ -45,4 +45,3 @@ brew install --cask filedrop
 - [ ] Upload files to servers via SCP  
 - [ ] Encrypted connections  
 - [ ] Use password for connection
-- [ ] Show received files in a list view  
