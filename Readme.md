@@ -18,6 +18,8 @@ Run it on each machine and start moving your stuff.
 
 Lightweight web-based companion for LAN sharing. Start a local server, share a link or QR, and send files or notes between any browser (desktop or phone) on your network — no app install required.
 
+![DropFile](./V2.png)
+
 ### Downloads (V1)
 
 | Platform | File |

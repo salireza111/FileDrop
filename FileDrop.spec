@@ -11,7 +11,7 @@ extra_pathex = []
 datas = [
     ('FileDrop_Web/server.py', 'FileDrop_Web'),
     ('FileDrop_Web/static', 'FileDrop_Web/static'),
-    ('FileDrop_V1/assets', 'assets'),
+    ('assets', 'assets'),
 ]
 vendor_dir = os.path.join(root_dir, 'FileDrop_Web', 'vendor')
 if os.path.isdir(vendor_dir):
@@ -19,7 +19,7 @@ if os.path.isdir(vendor_dir):
 
 
 a = Analysis(
-    ['FileDrop_V1/FileDrop.py'],
+    ['FileDrop.py'],
     pathex=extra_pathex,
     binaries=[],
     datas=datas,
@@ -49,7 +49,7 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=['FileDrop_V1/assets/icon.icns'],
+    icon=['assets/icon.icns'],
 )
 coll = COLLECT(
     exe,
@@ -63,6 +63,6 @@ coll = COLLECT(
 app = BUNDLE(
     coll,
     name='FileDrop.app',
-    icon='FileDrop_V1/assets/icon.icns',
+    icon='assets/icon.icns',
     bundle_identifier=None,
 )
