@@ -38,15 +38,19 @@ jobs:
       - name: Build web vendor
         run: python FileDrop_Web/build_vendor.py
 
-      - name: Build app (macOS)
-        if: runner.os == 'macOS'
+      - name: Build app
         run: pyinstaller -y FileDrop.spec
 
-      - name: Build app (Windows/Linux onefile)
-        if: runner.os != 'macOS'
-        env:
-          FILEDROP_ONEFILE: "1"
-        run: pyinstaller -y FileDrop.spec
+      - name: Install NSIS (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: choco install nsis -y
+
+      - name: Install AppImage tooling (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libfuse2
 
       - name: Package macOS
         if: runner.os == 'macOS'
@@ -57,12 +61,22 @@ jobs:
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          Move-Item -Force dist\\FileDrop.exe FileDrop-${{ env.RELEASE_TAG }}-windows.exe
+          $makensis = "$env:ProgramFiles(x86)\\NSIS\\makensis.exe"
+          & $makensis /DRELEASE_TAG=${{ env.RELEASE_TAG }} packaging\\windows\\installer.nsi
 
       - name: Package Linux
         if: runner.os == 'Linux'
         run: |
-          mv dist/FileDrop FileDrop-${{ env.RELEASE_TAG }}-linux
+          APPDIR=AppDir
+          mkdir -p "$APPDIR/usr/bin" "$APPDIR/usr/share/icons/hicolor/256x256/apps"
+          cp -r dist/FileDrop/* "$APPDIR/usr/bin/"
+          cp packaging/linux/AppRun "$APPDIR/AppRun"
+          chmod +x "$APPDIR/AppRun"
+          cp packaging/linux/FileDrop.desktop "$APPDIR/FileDrop.desktop"
+          cp assets/icon.png "$APPDIR/usr/share/icons/hicolor/256x256/apps/FileDrop.png"
+          curl -L -o appimagetool https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
+          chmod +x appimagetool
+          ./appimagetool "$APPDIR" "FileDrop-${{ env.RELEASE_TAG }}-linux.AppImage"
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
@@ -71,7 +85,7 @@ jobs:
           path: |
             FileDrop-${{ env.RELEASE_TAG }}-mac.dmg
             FileDrop-${{ env.RELEASE_TAG }}-windows.exe
-            FileDrop-${{ env.RELEASE_TAG }}-linux
+            FileDrop-${{ env.RELEASE_TAG }}-linux.AppImage
 
   release:
     needs: build
@@ -92,4 +106,4 @@ jobs:
           files: |
             release-artifacts/**/FileDrop-${{ env.RELEASE_TAG }}-mac.dmg
             release-artifacts/**/FileDrop-${{ env.RELEASE_TAG }}-windows.exe
-            release-artifacts/**/FileDrop-${{ env.RELEASE_TAG }}-linux
+            release-artifacts/**/FileDrop-${{ env.RELEASE_TAG }}-linux.AppImage

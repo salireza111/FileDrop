@@ -3,6 +3,7 @@
 import os
 import sys
 from PyInstaller.config import CONF
+from PyInstaller.utils.hooks import collect_all
 
 # Ensure PyInstaller cache stays within the workspace (avoids permission errors).
 CONF['cachedir'] = os.path.join(os.path.abspath('.'), 'build_cache')
@@ -27,13 +28,20 @@ vendor_dir = os.path.join(root_dir, 'FileDrop_Web', 'vendor')
 if os.path.isdir(vendor_dir):
     datas.append((vendor_dir, 'FileDrop_Web/vendor'))
 
+binaries = []
+hiddenimports = ['appdirs', 'zoneinfo', 'http.cookies', 'colorsys', 'html']
+if not is_darwin:
+    qt_datas, qt_binaries, qt_hidden = collect_all('PyQt5')
+    datas += qt_datas
+    binaries += qt_binaries
+    hiddenimports += qt_hidden
 
 a = Analysis(
     ['FileDrop.py'],
     pathex=extra_pathex,
-    binaries=[],
+    binaries=binaries,
     datas=datas,
-hiddenimports=['appdirs', 'zoneinfo', 'http.cookies', 'colorsys', 'html'],
+    hiddenimports=hiddenimports,
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
