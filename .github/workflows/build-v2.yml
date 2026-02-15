@@ -36,18 +36,45 @@ jobs:
           pip install pyinstaller
           pip show PyQt5 || true
 
+      - name: Ensure PyQt5 (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          pip install PyQt5==5.15.11 PyQt5-Qt5==5.15.17 PyQt5_sip==12.17.0
+          python -c "import PyQt5; import PyQt5.QtWidgets; print(PyQt5.__file__)"
+
+      - name: Clean build dirs
+        run: |
+          python - <<'PY'
+          import shutil
+          for d in ("build", "build_cache", "dist"):
+              shutil.rmtree(d, ignore_errors=True)
+          PY
+
       - name: Build web vendor
         run: python FileDrop_Web/build_vendor.py
 
       - name: Build app
-        run: pyinstaller -y FileDrop.spec
+        run: pyinstaller -y --clean FileDrop.spec
 
-      - name: Verify PyQt5 collected (Windows)
+      - name: Ensure PyQt5 in dist (Windows)
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
+          python - <<'PY'
+          import os, shutil, sys
+          try:
+              import PyQt5
+          except Exception as exc:
+              raise SystemExit(f"PyQt5 import failed: {exc}")
+          src = os.path.dirname(PyQt5.__file__)
+          dst = os.path.join("dist", "FileDrop", "_internal", "PyQt5")
+          if not os.path.isdir(dst):
+              os.makedirs(os.path.dirname(dst), exist_ok=True)
+              shutil.copytree(src, dst, dirs_exist_ok=True)
+          PY
           if (-not (Test-Path dist\\FileDrop\\_internal\\PyQt5)) {
-            throw "PyQt5 not collected into dist/FileDrop/_internal"
+            throw "PyQt5 not present in dist/FileDrop/_internal after copy"
           }
 
       - name: Install NSIS (Windows)
