@@ -1,6 +1,6 @@
 name: filedrop
 base: core22
-version: "1.0.0"
+version: "2.0.0"
 summary: Simple drag-and-drop LAN file transfer
 description: |
   …
@@ -11,24 +11,37 @@ architectures: [amd64]
 
 apps:
   filedrop:
-    command: bin/filedrop
+    command: bin/FileDrop
     environment:
       HOME: $SNAP_REAL_HOME
-    plugs:                       
+    plugs:
       - network
       - network-bind
-      - home               
-      - desktop            
-      - desktop-legacy     
-      - x11                
-      - wayland            
-      - opengl             
+      - home
+      - desktop
+      - desktop-legacy
+      - x11
+      - wayland
+      - opengl
 
 parts:
   filedrop:
-    plugin: dump
-    source: dist/
+    plugin: nil
+    source: .
+    build-packages:
+      - python3
+      - python3-pip
+      - python3-venv
+      - build-essential
+      - patchelf
     stage-packages:
-      - libgl1                   
-    organize:
-      FileDrop: bin/filedrop      
+      - libgl1
+    override-build: |
+      python3 -m pip install --upgrade pip
+      pip3 install -r requirements.txt
+      pip3 install -r FileDrop_Web/requirements.txt
+      pip3 install pyinstaller
+      python3 FileDrop_Web/build_vendor.py
+      pyinstaller -y --clean FileDrop.spec
+      mkdir -p $CRAFT_PART_INSTALL/bin
+      cp -r dist/FileDrop/* $CRAFT_PART_INSTALL/bin/
