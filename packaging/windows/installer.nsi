@@ -15,6 +15,14 @@ Page instfiles
 
 Section "Install"
   SetOutPath "$INSTDIR"
-  File /r "packaging\\windows\\stage\\*"
+  !ifexist "dist\\FileDrop\\*"
+    File /r "dist\\FileDrop\\*"
+  !else
+    !ifexist "dist\\FileDrop.exe"
+      File "dist\\FileDrop.exe"
+    !else
+      !error "Build output not found in dist/"
+    !endif
+  !endif
   CreateShortCut "$DESKTOP\\FileDrop.lnk" "$INSTDIR\\FileDrop.exe"
 SectionEnd

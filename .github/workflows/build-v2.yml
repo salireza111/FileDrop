@@ -63,20 +63,7 @@ jobs:
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          Remove-Item -Recurse -Force packaging\\windows\\stage -ErrorAction SilentlyContinue
-          New-Item -ItemType Directory -Path packaging\\windows\\stage | Out-Null
-          if (Test-Path dist\\FileDrop) {
-            robocopy dist\\FileDrop packaging\\windows\\stage /E /NFL /NDL /NJH /NJS /NC /NS
-            $rc = $LASTEXITCODE
-            if ($rc -ge 8) { throw "robocopy failed with exit code $rc" }
-          } elseif (Test-Path dist\\FileDrop.exe) {
-            Copy-Item -Force dist\\FileDrop.exe packaging\\windows\\stage\\FileDrop.exe
-          } else {
-            throw "Build output not found in dist/"
-          }
-          if (-not (Get-ChildItem packaging\\windows\\stage -Recurse -File | Select-Object -First 1)) {
-            throw "Staging folder is empty"
-          }
+          Get-ChildItem dist -Recurse | Select-Object FullName,Length
           $makensis = (Get-Command makensis.exe -ErrorAction SilentlyContinue).Source
           if (-not $makensis) {
             $makensis = Join-Path ${env:ProgramFiles(x86)} "NSIS\\makensis.exe"
