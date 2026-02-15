@@ -166,5 +166,3 @@ pyobjc-framework-Vision==11.1 ; sys_platform == "darwin"
 pyobjc-framework-WebKit==11.1 ; sys_platform == "darwin"
 
 PyQt5==5.15.11
-PyQt5-Qt5==5.15.17
-PyQt5_sip==12.17.0
