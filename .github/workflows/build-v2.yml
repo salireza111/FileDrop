@@ -63,7 +63,16 @@ jobs:
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          $makensis = "$env:ProgramFiles(x86)\\NSIS\\makensis.exe"
+          $makensis = (Get-Command makensis.exe -ErrorAction SilentlyContinue).Source
+          if (-not $makensis) {
+            $makensis = Join-Path ${env:ProgramFiles(x86)} "NSIS\\makensis.exe"
+          }
+          if (-not (Test-Path $makensis)) {
+            $makensis = Join-Path $env:ProgramFiles "NSIS\\makensis.exe"
+          }
+          if (-not (Test-Path $makensis)) {
+            throw "makensis.exe not found"
+          }
           & $makensis /DRELEASE_TAG=${{ env.RELEASE_TAG }} packaging\\windows\\installer.nsi
 
       - name: Package Linux
@@ -78,7 +87,7 @@ jobs:
           cp assets/icon.png "$APPDIR/usr/share/icons/hicolor/256x256/apps/FileDrop.png"
           curl -L -o appimagetool https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
           chmod +x appimagetool
-          ./appimagetool "$APPDIR" "FileDrop-${{ env.RELEASE_TAG }}-linux.AppImage"
+          ARCH=x86_64 ./appimagetool "$APPDIR" "FileDrop-${{ env.RELEASE_TAG }}-linux.AppImage"
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
