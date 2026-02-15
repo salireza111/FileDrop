@@ -138,7 +138,7 @@ jobs:
             FileDrop-${{ env.RELEASE_TAG }}-linux.AppImage
 
   release:
-    needs: build
+    needs: [build, snap]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -157,6 +157,7 @@ jobs:
             release-artifacts/**/FileDrop-${{ env.RELEASE_TAG }}-mac.dmg
             release-artifacts/**/FileDrop-${{ env.RELEASE_TAG }}-windows.exe
             release-artifacts/**/FileDrop-${{ env.RELEASE_TAG }}-linux.AppImage
+            release-artifacts/**/filedrop_*.snap
 
   snap:
     runs-on: ubuntu-22.04
