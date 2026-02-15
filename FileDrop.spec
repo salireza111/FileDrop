@@ -12,6 +12,7 @@ root_dir = os.path.abspath('.')
 onefile = os.environ.get('FILEDROP_ONEFILE') == '1'
 is_darwin = sys.platform == 'darwin'
 is_win = sys.platform.startswith('win')
+use_upx = False
 if is_darwin:
     exe_icon = 'assets/icon.icns'
 elif is_win:
@@ -36,6 +37,7 @@ if not is_darwin:
     binaries += qt_binaries
     hiddenimports += qt_hidden
     hiddenimports += collect_submodules('PyQt5')
+    hiddenimports += ['PyQt5.sip', 'sip']
 
 a = Analysis(
     ['FileDrop.py'],
@@ -63,7 +65,7 @@ if onefile:
         debug=False,
         bootloader_ignore_signals=False,
         strip=False,
-        upx=True,
+        upx=use_upx,
         console=False,
         disable_windowed_traceback=False,
         argv_emulation=False,
@@ -82,7 +84,7 @@ else:
         debug=False,
         bootloader_ignore_signals=False,
         strip=False,
-        upx=True,
+        upx=use_upx,
         console=False,
         disable_windowed_traceback=False,
         argv_emulation=False,
@@ -97,7 +99,7 @@ else:
         a.zipfiles,
         a.datas,
         strip=False,
-        upx=True,
+        upx=use_upx,
         upx_exclude=[],
         name='FileDrop',
     )

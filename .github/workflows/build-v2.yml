@@ -42,6 +42,14 @@ jobs:
       - name: Build app
         run: pyinstaller -y FileDrop.spec
 
+      - name: Verify PyQt5 collected (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          if (-not (Test-Path dist\\FileDrop\\_internal\\PyQt5)) {
+            throw "PyQt5 not collected into dist/FileDrop/_internal"
+          }
+
       - name: Install NSIS (Windows)
         if: runner.os == 'Windows'
         shell: pwsh
