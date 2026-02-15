@@ -1,0 +1,5 @@
+fastapi==0.115.8
+uvicorn[standard]==0.30.6
+python-multipart==0.0.12
+qrcode==8.0
+pillow==10.4.0

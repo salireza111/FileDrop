@@ -14,6 +14,10 @@ I wrote FileDrop because I was tired of swapping USB drives and typing long `scp
 
 Run it on each machine and start moving your stuff.
 
+## FileDrop Web (V2)
+
+Lightweight web-based companion for LAN sharing. Start a local server, share a link or QR, and send files or notes between any browser (desktop or phone) on your network — no app install required.
+
 ### Downloads (V1)
 
 | Platform | File |

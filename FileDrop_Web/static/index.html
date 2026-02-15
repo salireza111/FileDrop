@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FileDrop Web</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <main class="page">
+      <div class="toolbar">
+        <div class="panel-menu">
+          <button id="panelMenuBtn" type="button">Panels ▾</button>
+          <div id="panelMenu" class="panel-menu-pop">
+            <label><input type="checkbox" data-panel-toggle="share" /> Share</label>
+            <label><input type="checkbox" data-panel-toggle="connect" /> Connect</label>
+            <label><input type="checkbox" data-panel-toggle="send" /> Send Files</label>
+            <label><input type="checkbox" data-panel-toggle="notes" /> Shared Note</label>
+            <label><input type="checkbox" data-panel-toggle="files" /> Files Received</label>
+            <label><input type="checkbox" data-panel-toggle="clients" /> Connected Clients</label>
+          </div>
+        </div>
+        <div class="theme-bar">
+          <label for="themeSelect">Theme</label>
+          <select id="themeSelect">
+            <option value="sand">Sand</option>
+            <option value="slate">Slate</option>
+            <option value="mint">Mint</option>
+            <option value="noir">Noir</option>
+            <option value="forest">Forest</option>
+          </select>
+        </div>
+      </div>
+
+      <header class="hero">
+        <div>
+          <div class="eyebrow">Local Share Server</div>
+          <h1>FileDrop Web</h1>
+          <p class="sub">Run this server on one computer. Others connect by link or QR from any browser.</p>
+        </div>
+        <div class="share panel-card" data-panel="share">
+          <div class="panel-header-row">
+            <div class="share-label">Share link</div>
+          </div>
+          <div class="share-row">
+            <input id="shareUrl" type="text" readonly />
+            <button id="copyBtn" type="button">Copy</button>
+          </div>
+          <img id="qrImg" alt="QR code" />
+          <div class="hint" id="qrHint"></div>
+        </div>
+      </header>
+
+      <section class="panel-grid">
+        <section class="panel" data-section="connect">
+          <div class="panel-header-row">
+            <div class="panel-header">Connect</div>
+          </div>
+          <div class="grid">
+            <label class="field">
+              <span>Your name</span>
+              <input id="nameInput" type="text" placeholder="e.g. Phone" />
+            </label>
+            <label class="field" id="codeField">
+              <span>Access code</span>
+              <input id="codeInput" type="password" placeholder="optional" />
+            </label>
+          </div>
+          <div class="connect-controls">
+            <div class="switch-field inline">
+              <span>Allow receiving</span>
+              <label class="switch">
+                <input id="receiveToggle" type="checkbox" checked />
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="connect-row">
+              <div id="status" class="status">Disconnected</div>
+              <button id="connectBtn" type="button">Connect</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel" data-section="send">
+          <div class="panel-header-row">
+            <div class="panel-header">Send Files</div>
+          </div>
+          <div class="upload">
+            <input id="fileInput" type="file" />
+            <button id="uploadBtn" type="button">Upload</button>
+          </div>
+          <div class="upload-meta">
+            <div id="uploadFileName" class="hint">No file selected</div>
+            <div id="uploadSpeed" class="hint"></div>
+          </div>
+          <div class="progress">
+            <div id="uploadBar"></div>
+          </div>
+          <div id="uploadStatus" class="hint">No upload yet</div>
+        </section>
+
+        <section class="panel" data-section="notes">
+          <div class="panel-header-row">
+            <div class="panel-header">Shared Note</div>
+          </div>
+          <div id="notes" class="notes"></div>
+          <div class="note-actions">
+            <input id="noteInput" type="text" placeholder="Type a message..." />
+            <button id="sendNoteBtn" type="button">Send</button>
+          </div>
+          <div id="noteStatus" class="hint">No note yet</div>
+        </section>
+
+        <section class="panel" data-section="files">
+          <div class="panel-header-row">
+            <div class="panel-header">Files Received</div>
+          </div>
+          <div class="save-row inline">
+            <button id="chooseDirBtn" type="button">Save to…</button>
+            <div id="saveDirLabel" class="status muted">Not set</div>
+          </div>
+          <div id="saveHint" class="hint">Server storage path (host only).</div>
+          <div id="fileList" class="file-list"></div>
+        </section>
+
+        <section class="panel" data-section="clients">
+          <div class="panel-header-row">
+            <div class="panel-header">Connected Clients</div>
+          </div>
+          <div id="clientHint" class="hint">Connect to select recipients. Gray = send-only.</div>
+          <div id="clientList" class="client-list"></div>
+        </section>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>

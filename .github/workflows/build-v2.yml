@@ -1,0 +1,88 @@
+name: Build V2 Releases
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release tag (e.g., v2.0.0)"
+        required: true
+  push:
+    tags:
+      - "v2*"
+
+env:
+  RELEASE_TAG: ${{ github.event.inputs.version || github.ref_name }}
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r FileDrop_V1/requirements.txt
+          pip install -r FileDrop_Web/requirements.txt
+          pip install pyinstaller
+
+      - name: Build web vendor
+        run: python FileDrop_Web/build_vendor.py
+
+      - name: Build app
+        run: pyinstaller -y FileDrop.spec
+
+      - name: Package macOS
+        if: runner.os == 'macOS'
+        run: |
+          hdiutil create -volname FileDrop -srcfolder dist/FileDrop.app -ov -format UDZO FileDrop-${{ env.RELEASE_TAG }}-mac.dmg
+
+      - name: Package Windows
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          Compress-Archive -Path dist\FileDrop\* -DestinationPath FileDrop-${{ env.RELEASE_TAG }}-windows.zip
+
+      - name: Package Linux
+        if: runner.os == 'Linux'
+        run: |
+          tar -czf FileDrop-${{ env.RELEASE_TAG }}-linux.tar.gz -C dist FileDrop
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: FileDrop-${{ matrix.os }}
+          path: |
+            FileDrop-${{ env.RELEASE_TAG }}-mac.dmg
+            FileDrop-${{ env.RELEASE_TAG }}-windows.zip
+            FileDrop-${{ env.RELEASE_TAG }}-linux.tar.gz
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: release-artifacts
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.RELEASE_TAG }}
+          name: FileDrop V2 - ${{ env.RELEASE_TAG }}
+          files: |
+            release-artifacts/**/FileDrop-${{ env.RELEASE_TAG }}-mac.dmg
+            release-artifacts/**/FileDrop-${{ env.RELEASE_TAG }}-windows.zip
+            release-artifacts/**/FileDrop-${{ env.RELEASE_TAG }}-linux.tar.gz
