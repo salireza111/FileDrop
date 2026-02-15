@@ -1,8 +1,24 @@
 import argparse
-import colorsys  # PyInstaller packaging guard
-import http.cookies  # PyInstaller packaging guard
-import zoneinfo  # PyInstaller packaging guard
-import html  # PyInstaller packaging guard
+# PyInstaller packaging guard for stdlib modules used indirectly by FastAPI/Starlette/Pydantic.
+import base64  # noqa: F401
+import colorsys  # noqa: F401
+import datetime  # noqa: F401
+import email  # noqa: F401
+import email.message  # noqa: F401
+import email.parser  # noqa: F401
+import email.policy  # noqa: F401
+import email.utils  # noqa: F401
+import hashlib  # noqa: F401
+import hmac  # noqa: F401
+import html  # noqa: F401
+import http.cookies  # noqa: F401
+import ipaddress  # noqa: F401
+import mimetypes  # noqa: F401
+import secrets  # noqa: F401
+import ssl  # noqa: F401
+import urllib.parse  # noqa: F401
+import uuid  # noqa: F401
+import zoneinfo  # noqa: F401
 import json
 import os
 import socket

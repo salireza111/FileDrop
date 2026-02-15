@@ -1,12 +1,15 @@
 # -*- mode: python ; coding: utf-8 -*-
 
 import os
+import sys
 from PyInstaller.config import CONF
 
 # Ensure PyInstaller cache stays within the workspace (avoids permission errors).
 CONF['cachedir'] = os.path.join(os.path.abspath('.'), 'build_cache')
 
 root_dir = os.path.abspath('.')
+onefile = os.environ.get('FILEDROP_ONEFILE') == '1'
+is_darwin = sys.platform == 'darwin'
 extra_pathex = []
 datas = [
     ('FileDrop_Web/server.py', 'FileDrop_Web'),
@@ -37,7 +40,7 @@ exe = EXE(
     pyz,
     a.scripts,
     [],
-    exclude_binaries=True,
+    exclude_binaries=not onefile,
     name='FileDrop',
     debug=False,
     bootloader_ignore_signals=False,
@@ -51,18 +54,21 @@ exe = EXE(
     entitlements_file=None,
     icon=['assets/icon.icns'],
 )
-coll = COLLECT(
-    exe,
-    a.binaries,
-    a.datas,
-    strip=False,
-    upx=True,
-    upx_exclude=[],
-    name='FileDrop',
-)
-app = BUNDLE(
-    coll,
-    name='FileDrop.app',
-    icon='assets/icon.icns',
-    bundle_identifier=None,
-)
+if not onefile:
+    coll = COLLECT(
+        exe,
+        a.binaries,
+        a.datas,
+        strip=False,
+        upx=True,
+        upx_exclude=[],
+        name='FileDrop',
+    )
+
+    if is_darwin:
+        app = BUNDLE(
+            coll,
+            name='FileDrop.app',
+            icon='assets/icon.icns',
+            bundle_identifier=None,
+        )
