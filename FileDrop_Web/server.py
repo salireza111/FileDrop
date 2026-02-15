@@ -18,7 +18,13 @@ import secrets  # noqa: F401
 import ssl  # noqa: F401
 import urllib.parse  # noqa: F401
 import uuid  # noqa: F401
-import zoneinfo  # noqa: F401
+try:  # pragma: no cover - used for packaging guard
+    import zoneinfo  # noqa: F401
+except Exception:  # pragma: no cover - py<3.9 fallback
+    try:
+        import backports.zoneinfo as zoneinfo  # noqa: F401
+    except Exception:
+        zoneinfo = None  # noqa: F401
 import json
 import os
 import socket

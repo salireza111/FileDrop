@@ -3,3 +3,4 @@ uvicorn[standard]==0.30.6
 python-multipart==0.0.12
 qrcode==7.4.2
 pillow==10.4.0
+backports.zoneinfo; python_version < "3.9"
