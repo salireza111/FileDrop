@@ -45,11 +45,7 @@ jobs:
 
       - name: Clean build dirs
         run: |
-          python - <<'PY'
-          import shutil
-          for d in ("build", "build_cache", "dist"):
-              shutil.rmtree(d, ignore_errors=True)
-          PY
+          python -c "import shutil; [shutil.rmtree(d, ignore_errors=True) for d in ('build','build_cache','dist')]"
 
       - name: Build web vendor
         run: python FileDrop_Web/build_vendor.py
@@ -61,18 +57,7 @@ jobs:
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          python - <<'PY'
-          import os, shutil, sys
-          try:
-              import PyQt5
-          except Exception as exc:
-              raise SystemExit(f"PyQt5 import failed: {exc}")
-          src = os.path.dirname(PyQt5.__file__)
-          dst = os.path.join("dist", "FileDrop", "_internal", "PyQt5")
-          if not os.path.isdir(dst):
-              os.makedirs(os.path.dirname(dst), exist_ok=True)
-              shutil.copytree(src, dst, dirs_exist_ok=True)
-          PY
+          python -c "import os,shutil; import PyQt5; src=os.path.dirname(PyQt5.__file__); dst=os.path.join('dist','FileDrop','_internal','PyQt5'); os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copytree(src, dst, dirs_exist_ok=True)"
           if (-not (Test-Path dist\\FileDrop\\_internal\\PyQt5)) {
             throw "PyQt5 not present in dist/FileDrop/_internal after copy"
           }
