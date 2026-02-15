@@ -55,7 +55,9 @@ jobs:
       - name: Package macOS
         if: runner.os == 'macOS'
         run: |
-          hdiutil create -volname FileDrop -srcfolder dist/FileDrop.app -ov -format UDZO FileDrop-${{ env.RELEASE_TAG }}-mac.dmg
+          rm -f FileDrop-${{ env.RELEASE_TAG }}-mac.dmg
+          hdiutil info | awk '/FileDrop/ {print $1}' | xargs -I {} hdiutil detach {} || true
+          hdiutil create -volname "FileDrop ${{ env.RELEASE_TAG }}" -srcfolder dist/FileDrop.app -ov -format UDZO FileDrop-${{ env.RELEASE_TAG }}-mac.dmg
 
       - name: Package Windows
         if: runner.os == 'Windows'
