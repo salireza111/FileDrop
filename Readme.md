@@ -24,9 +24,9 @@ Lightweight web-based companion for LAN sharing. Start a local server, share a l
 
 | Platform | File |
 |----------|------|
-| Linux | [FileDrop-linux.tar.gz](https://github.com/salireza111/FileDrop/releases/download/v2.0.9.2/FileDrop-v2.0.9.2-linux.AppImage) |
-| macOS | [FileDrop-mac.zip](https://github.com/salireza111/FileDrop/releases/download/v2.0.9.2/FileDrop-v2.0.9.2-mac.dmg) |
-| Windows | [FileDrop-windows.7z](https://github.com/salireza111/FileDrop/releases/download/v2.0.9.2/FileDrop-v2.0.9.2-windows.exe) |
+| Linux | [FileDrop-linux](https://github.com/salireza111/FileDrop/releases/download/v2.0.9.2/FileDrop-v2.0.9.2-linux.AppImage) |
+| macOS | [FileDrop-mac](https://github.com/salireza111/FileDrop/releases/download/v2.0.9.2/FileDrop-v2.0.9.2-mac.dmg) |
+| Windows | [FileDrop-windows](https://github.com/salireza111/FileDrop/releases/download/v2.0.9.2/FileDrop-v2.0.9.2-windows.exe) |
 
 ## 📦 Install on macOS (Homebrew)
 
@@ -37,7 +37,7 @@ brew tap salireza111/filedrop
 # Then install or upgrade any time
 brew install --cask filedrop
 ```
-## 📦 Snap (V1)
+## 📦 Snap
 [![Get it from the Snap Store](https://snapcraft.io/en/dark/install.svg)](https://snapcraft.io/filedrop)
 
 ### Roadmap
