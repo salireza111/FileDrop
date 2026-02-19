@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FileDrop — Local file sharing</title>
+    <meta
+      name="description"
+      content="FileDrop V1 and V2. A local file sharing app with a sleek, device-friendly experience."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="icon" type="image/png" href="./assets/icon.png" />
+  </head>
+  <body>
+    <div class="bg">
+      <div class="bg-glow bg-glow--one"></div>
+      <div class="bg-glow bg-glow--two"></div>
+      <div class="bg-grid"></div>
+      <div class="bg-noise"></div>
+    </div>
+
+    <header class="nav">
+      <div class="logo">
+        <span class="logo-mark">
+          <img src="./assets/icon.png" alt="FileDrop logo" />
+        </span>
+        <span class="logo-text">FileDrop</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#versions">V1 → V2</a>
+        <a href="#experience">Experience</a>
+        <a href="#cta" class="nav-cta">Get FileDrop</a>
+      </nav>
+      <button class="nav-toggle" type="button" aria-label="Open navigation">
+        <span></span>
+      </button>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow">Local file sharing</div>
+          <h1>
+            Share files at the speed of your room.
+            <span>FileDrop V2 is the polished evolution.</span>
+          </h1>
+          <p class="lead">
+            FileDrop runs on your network and lets every device join instantly by link or QR.
+            V1 was the proof. V2 is the dashboard-built workflow.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#cta">Download for Desktop</a>
+            <a class="btn btn-ghost" href="https://github.com/salireza111/FileDrop" target="_blank" rel="noreferrer">
+              View on GitHub
+            </a>
+          </div>
+          <div class="hero-meta">
+            <div>
+              <div class="meta-title">Runs locally</div>
+              <div class="meta-sub">Share inside your network without accounts.</div>
+            </div>
+            <div>
+              <div class="meta-title">Multi-device</div>
+              <div class="meta-sub">Any browser joins with a link or QR.</div>
+            </div>
+            <div>
+              <div class="meta-title">Zero friction</div>
+              <div class="meta-sub">Drag, drop, and send in seconds.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="orbit">
+            <div class="orbit-dot"></div>
+            <div class="orbit-dot"></div>
+            <div class="orbit-dot"></div>
+          </div>
+
+          <div class="device">
+            <div class="device-header">
+              <div class="status-dot"></div>
+              <span>FileDrop V2 Dashboard</span>
+              <div class="device-pills">
+                <span class="pill">Share</span>
+                <span class="pill">Send</span>
+                <span class="pill">Notes</span>
+              </div>
+            </div>
+            <div class="device-screen">
+              <div class="screen-col">
+                <div class="screen-card">
+                  <div class="card-title">Share Link</div>
+                  <div class="card-row">
+                    <span>http://192.168.0.5</span>
+                    <div class="chip">Copy</div>
+                  </div>
+                  <div class="qr">
+                    <div class="qr-block"></div>
+                    <div class="qr-block"></div>
+                    <div class="qr-block"></div>
+                    <div class="qr-block"></div>
+                  </div>
+                </div>
+                <div class="screen-card">
+                  <div class="card-title">Connected Clients</div>
+                  <div class="client">
+                    <span class="client-dot"></span>
+                    <span>Studio Mac</span>
+                    <span class="client-tag">Ready</span>
+                  </div>
+                  <div class="client">
+                    <span class="client-dot"></span>
+                    <span>iPad Pro</span>
+                    <span class="client-tag">Send</span>
+                  </div>
+                </div>
+              </div>
+              <div class="screen-col">
+                <div class="screen-card screen-card--tall">
+                  <div class="card-title">Live Transfer</div>
+                  <div class="progress">
+                    <div class="progress-bar"></div>
+                  </div>
+                  <div class="progress-meta">
+                    <span>shots.zip</span>
+                    <span>82%</span>
+                  </div>
+                  <div class="transfer-list">
+                    <div class="transfer">
+                      <span class="transfer-dot"></span>
+                      <span>render_04.mov</span>
+                      <span class="transfer-tag">Queued</span>
+                    </div>
+                    <div class="transfer">
+                      <span class="transfer-dot"></span>
+                      <span>boards.pdf</span>
+                      <span class="transfer-tag">Sent</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="screen-card">
+                  <div class="card-title">Shared Notes</div>
+                  <p class="note">"Drop final assets in /Exports"</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="code-panel">
+            <div class="code-header">
+              <span class="code-title">Live Session</span>
+              <span class="code-status">active</span>
+            </div>
+            <div class="code-lines">
+              <div class="code-line" data-code-line></div>
+              <div class="code-line" data-code-line></div>
+              <div class="code-line" data-code-line></div>
+              <div class="code-line" data-code-line></div>
+              <div class="code-line" data-code-line></div>
+            </div>
+            <div class="code-footer">
+              <div class="pulse"></div>
+              <span>watching /drops</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="section">
+        <div class="section-head">
+          <h2>Built for the real moment you need it</h2>
+          <p>
+            FileDrop keeps the experience local, fast, and focused. No accounts, no setup on
+            the receiver. Just a link, a QR, and a clean workflow.
+          </p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature">
+            <h3>Local share link</h3>
+            <p>Spin up a share page on your machine and invite anyone nearby.</p>
+          </article>
+          <article class="feature">
+            <h3>QR connect</h3>
+            <p>Mobile devices join instantly with a camera scan.</p>
+          </article>
+          <article class="feature">
+            <h3>Send & receive panels</h3>
+            <p>Monitor uploads, progress, and recipients in one place.</p>
+          </article>
+          <article class="feature">
+            <h3>Shared notes</h3>
+            <p>Leave a quick instruction next to the files for the team.</p>
+          </article>
+          <article class="feature">
+            <h3>Client targeting</h3>
+            <p>Select which connected device receives the next drop.</p>
+          </article>
+          <article class="feature">
+            <h3>Save location control</h3>
+            <p>Pick a host folder and keep every incoming file organized.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="versions" class="section">
+        <div class="section-head">
+          <h2>The evolution from V1 to V2</h2>
+          <p>Same instant sharing. A smarter flow designed for multiple devices.</p>
+        </div>
+        <div class="version-grid">
+          <article class="version-card">
+            <div class="version-title">FileDrop V1</div>
+            <ul class="version-list">
+              <li>Lightweight local sharing</li>
+              <li>Single-screen focus</li>
+              <li>Direct file drop workflow</li>
+              <li>SCP download option for quick pulls</li>
+              <li>Minimal setup</li>
+            </ul>
+          </article>
+          <article class="version-card version-card--accent">
+            <div class="version-title">FileDrop V2</div>
+            <ul class="version-list">
+              <li>Multi-panel dashboard</li>
+              <li>Share link + QR + notes</li>
+              <li>Connected client targeting</li>
+              <li>Transfer visibility + progress</li>
+              <li>Server info saved for next login</li>
+              <li>V1 core kept, polished for minimum bugs</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="experience" class="section experience">
+        <div class="section-head">
+          <h2>Experience, not just transfer</h2>
+          <p>
+            Designed to feel like a calm, focused cockpit. Everything you need, visible at a
+            glance.
+          </p>
+        </div>
+        <div class="experience-steps">
+          <div class="step">
+            <span class="step-number">01</span>
+            <div>
+              <h3>Launch the host</h3>
+              <p>FileDrop runs locally and prepares a share link instantly.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-number">02</span>
+            <div>
+              <h3>Connect by QR</h3>
+              <p>Join from mobile, tablet, or another desktop in seconds.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-number">03</span>
+            <div>
+              <h3>Drop files, track flow</h3>
+              <p>Watch progress, confirm delivery, and keep the team aligned.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="cta" class="section cta">
+        <div class="cta-card">
+          <div>
+            <h2>Ready to ship files without the wait?</h2>
+            <p>
+              FileDrop V2 is built for creators, teams, and anyone moving assets fast.
+              Bring it to your network in minutes.
+            </p>
+          </div>
+          <div class="cta-actions">
+            <a
+              class="btn btn-primary"
+              href="https://github.com/salireza111/FileDrop/releases/download/v2.0.9.2/FileDrop-v2.0.9.2-mac.dmg"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Download for macOS
+            </a>
+            <a class="btn btn-ghost" href="https://github.com/salireza111/FileDrop" target="_blank" rel="noreferrer">
+              See the repo
+            </a>
+          </div>
+        </div>
+        <div class="download-grid">
+          <a
+            class="download-card"
+            href="https://github.com/salireza111/FileDrop/releases/download/v2.0.9.2/FileDrop-v2.0.9.2-mac.dmg"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <div class="platform-icon apple"></div>
+            <div>
+              <div class="download-title">macOS</div>
+              <div class="download-sub">FileDrop-mac</div>
+            </div>
+          </a>
+          <a
+            class="download-card"
+            href="https://github.com/salireza111/FileDrop/releases/download/v2.0.9.2/FileDrop-v2.0.9.2-windows.exe"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <div class="platform-icon windows"></div>
+            <div>
+              <div class="download-title">Windows</div>
+              <div class="download-sub">FileDrop-windows</div>
+            </div>
+          </a>
+          <a
+            class="download-card"
+            href="https://github.com/salireza111/FileDrop/releases/download/v2.0.9.2/FileDrop-v2.0.9.2-linux.AppImage"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <div class="platform-icon linux"></div>
+            <div>
+              <div class="download-title">Linux</div>
+              <div class="download-sub">FileDrop-linux</div>
+            </div>
+          </a>
+        </div>
+        <div class="install-grid">
+          <div class="install-card install-card--center">
+            <div class="install-title">Install on macOS (Homebrew)</div>
+            <pre class="install-code"><code># Add the tap once
+brew tap salireza111/filedrop
+
+# Then install or upgrade any time
+brew install --cask filedrop</code></pre>
+          </div>
+          <div class="install-card install-card--center">
+            <div class="install-title">Install on Linux (Snap Store)</div>
+            <a class="snap-badge" href="https://snapcraft.io/filedrop" target="_blank" rel="noreferrer">
+              <img alt="Get it from the Snap Store" src="https://snapcraft.io/en/light/install.svg" />
+            </a>
+            <pre class="install-code install-code--compact"><code>sudo snap install filedrop</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="donate" class="section donate">
+        <div class="section-head">
+          <h2>Support FileDrop</h2>
+          <p>If FileDrop helps your workflow, donations keep the project moving.</p>
+        </div>
+        <div class="donate-grid">
+          <div class="donate-card">
+            <div class="donate-body">
+              <div class="donate-title">Solana</div>
+              <div class="donate-address" data-copy="Ad6y4EVwZcvr2CeJdkHEmNDTVSbQYu7ZMmeCXCRJZ19B">
+                Ad6y4EVwZcvr2CeJdkHEmNDTVSbQYu7ZMmeCXCRJZ19B
+              </div>
+              <button class="btn btn-ghost donate-copy" type="button" data-copy-button>
+                Copy address
+              </button>
+            </div>
+          </div>
+          <div class="donate-card">
+            <div class="donate-body">
+              <div class="donate-title">Ethereum</div>
+              <div class="donate-address" data-copy="0xe5D05B5a1a2106Aa98479e594db0d3af5509e934">
+                0xe5D05B5a1a2106Aa98479e594db0d3af5509e934
+              </div>
+              <button class="btn btn-ghost donate-copy" type="button" data-copy-button>
+                Copy address
+              </button>
+            </div>
+          </div>
+          <div class="donate-card">
+            <div class="donate-body">
+              <div class="donate-title">Polygon</div>
+              <div class="donate-address" data-copy="0xe5D05B5a1a2106Aa98479e594db0d3af5509e934">
+                0xe5D05B5a1a2106Aa98479e594db0d3af5509e934
+              </div>
+              <button class="btn btn-ghost donate-copy" type="button" data-copy-button>
+                Copy address
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-brand">
+        <span class="logo-mark">
+          <img src="./assets/icon.png" alt="FileDrop logo" />
+        </span>
+        <span>FileDrop</span>
+      </div>
+      <div class="footer-links">
+        <span>Local • Minimal • Fast</span>
+        <span>Built in 2026</span>
+      </div>
+    </footer>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
